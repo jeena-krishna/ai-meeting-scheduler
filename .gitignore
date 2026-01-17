@@ -1,0 +1,28 @@
+# Environment variables
+.env
+backend/.env
+
+# Google credentials
+backend/credentials.json
+backend/token.pickle
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+frontend/build/
+frontend/.env
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
