@@ -84,7 +84,7 @@ function App() {
                 <h3>Suggested Alternative Times:</h3>
                 <ul>
                   {response.suggestions.map((suggestion, index) => (
-                    <li key={index}>{suggestion.formatted}</li>
+                    <li key={index}>{suggestion}</li>
                   ))}
                 </ul>
               </div>
