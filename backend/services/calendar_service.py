@@ -132,8 +132,8 @@ def create_calendar_event(meeting_details):
         event = {
             'summary': meeting_details.get('title', 'Meeting'),
             'description': meeting_details.get('description', ''),
-            'start': {'dateTime': start_datetime.isoformat(), 'timeZone': 'America/Chicago'},
-            'end': {'dateTime': end_datetime.isoformat(), 'timeZone': 'America/Chicago'},
+            'start': {'dateTime': start_datetime.isoformat(), 'timeZone': 'America/New_York'},
+            'end': {'dateTime': end_datetime.isoformat(), 'timeZone': 'America/New_York'},
         }
         
         if meeting_details.get('attendees'):
