@@ -139,3 +139,5 @@ def create_calendar_event(meeting_details):
         }
     except Exception as e:
         return {'success': False, 'error': str(e)}
+    
+create_meeting = create_calendar_event
