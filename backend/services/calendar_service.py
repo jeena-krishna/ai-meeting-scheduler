@@ -61,9 +61,10 @@ def check_availability(meeting_details):
         duration = meeting_details.get('duration', 30)
         end_datetime = meeting_datetime + timedelta(minutes=duration)
         
-        # Use timezone-aware format for America/Chicago
         time_min = meeting_datetime.isoformat() + '-05:00'
         time_max = end_datetime.isoformat() + '-05:00'
+        
+        print(f"Checking availability from {time_min} to {time_max}")
         
         events_result = service.events().list(
             calendarId='primary',
@@ -74,6 +75,7 @@ def check_availability(meeting_details):
         ).execute()
         
         events = events_result.get('items', [])
+        print(f"Found {len(events)} events: {events}")
         
         if not events:
             return {'available': True, 'conflicts': [], 'suggested_times': []}
@@ -87,6 +89,7 @@ def check_availability(meeting_details):
     except Exception as e:
         print(f"Error checking availability: {e}")
         return {'available': True, 'conflicts': [], 'suggested_times': []}
+
 
 def find_alternative_times(service, original_time, duration):
     """Find 3 available time slots near the requested time"""
