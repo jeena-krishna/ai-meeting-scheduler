@@ -16,6 +16,18 @@ CORS(app)  # Allow frontend to communicate with backend
 def health_check():
     return jsonify({"status": "Server is running!"}), 200
 # Main endpoint - process meeting request
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "app": "AI Meeting Scheduler API",
+        "version": "1.0",
+        "status": "running",
+        "endpoints": {
+            "GET /health": "Health check",
+            "POST /schedule-meeting": "Schedule a meeting with natural language"
+        },
+        "developer": "Jeena"
+    }), 200
 @app.route('/schedule-meeting', methods=['POST'])
 def schedule_meeting():
     try:
