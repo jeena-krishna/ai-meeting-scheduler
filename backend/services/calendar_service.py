@@ -61,10 +61,14 @@ def check_availability(meeting_details):
         duration = meeting_details.get('duration', 30)
         end_datetime = meeting_datetime + timedelta(minutes=duration)
         
+        # Use timezone-aware format for America/Chicago
+        time_min = meeting_datetime.isoformat() + '-05:00'
+        time_max = end_datetime.isoformat() + '-05:00'
+        
         events_result = service.events().list(
             calendarId='primary',
-            timeMin=meeting_datetime.isoformat() + 'Z',
-            timeMax=end_datetime.isoformat() + 'Z',
+            timeMin=time_min,
+            timeMax=time_max,
             singleEvents=True,
             orderBy='startTime'
         ).execute()
@@ -93,10 +97,13 @@ def find_alternative_times(service, original_time, duration):
         check_time += timedelta(minutes=30)
         end_time = check_time + timedelta(minutes=duration)
         
+        time_min = check_time.isoformat() + '-05:00'
+        time_max = end_time.isoformat() + '-05:00'
+        
         events = service.events().list(
             calendarId='primary',
-            timeMin=check_time.isoformat() + 'Z',
-            timeMax=end_time.isoformat() + 'Z',
+            timeMin=time_min,
+            timeMax=time_max,
             singleEvents=True
         ).execute().get('items', [])
         
@@ -139,5 +146,3 @@ def create_calendar_event(meeting_details):
         }
     except Exception as e:
         return {'success': False, 'error': str(e)}
-    
-create_meeting = create_calendar_event
