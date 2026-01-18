@@ -59,11 +59,11 @@ function App() {
             <div className="details">
               <p><strong>Attendee:</strong> {response.details.attendee}</p>
               <p><strong>Date:</strong> {response.details.date}</p>
-              <p><strong>Time:</strong> {response.details.time}</p>
+              <p><strong>Time:</strong> {new Date('2000-01-01 ' + response.details.time).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', hour12: true})}</p>
               <p><strong>Duration:</strong> {response.details.duration} minutes</p>
             </div>
             <div className="button-group">
-              <a href={response.calendar_link} target="_blank" rel="noopener noreferrer" className="calendar-link">
+              <a href={response.calendar_link?.event_link} target="_blank" rel="noopener noreferrer" className="calendar-link">
                 View in Google Calendar →
               </a>
               <button onClick={() => { setMeetingText(''); setResponse(null); }} className="reset-btn">
